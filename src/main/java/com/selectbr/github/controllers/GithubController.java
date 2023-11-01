@@ -26,14 +26,16 @@ public class GithubController {
     }
 
     @GetMapping("{username}")
-    @Operation(summary = "Realiza busca dos repositórios pelo username")
+    @Operation(
+            summary = "Busca de Repositórios por Username",
+            description = "Endpoint para buscar os repositórios de um usuário do GitHub.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso."),
-            @ApiResponse(responseCode = "400", description = "Retorna quando houver uma validação pré-definida."),
-            @ApiResponse(responseCode = "404", description = "Retorna quando o recurso não for encontrado."),
-            @ApiResponse(responseCode = "500", description = "Retorna quando houver um erro não identificado.")
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida. Retorna a lista de repositórios."),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida devido a validações pré-definidas."),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado para o username fornecido."),
+            @ApiResponse(responseCode = "500", description = "Erro interno não identificado no servidor.")
     })
-    public ResponseEntity<List<GithubDTO>> getRepositoriesByUser(@PathVariable String username){
+    public ResponseEntity<List<GithubDTO>> getRepositoriesByUser(@PathVariable String username) {
         return ResponseEntity.ok(githubService.getRepositoriesByUser(username));
     }
 }
