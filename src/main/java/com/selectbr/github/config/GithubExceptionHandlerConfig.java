@@ -1,12 +1,14 @@
-package com.selectbr.github.exceptions;
+package com.selectbr.github.config;
 
+import com.selectbr.github.exceptions.BadRequestException;
+import com.selectbr.github.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GithubExceptionHandler {
+public class GithubExceptionHandlerConfig {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<String> handlerBadRequestException(BadRequestException badRequestExceptionException){
@@ -16,10 +18,5 @@ public class GithubExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handlerNotFoundException(NotFoundException notFoundException){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundException.getMessage());
-    }
-
-    @ExceptionHandler(InternalServerErrorException.class)
-    public ResponseEntity<String> handlerInternalServerErrorException(InternalServerErrorException exception){
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
 }
